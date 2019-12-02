@@ -1,7 +1,6 @@
 # C# client for Ecwid API
 
-[![Build status](https://ci.appveyor.com/api/projects/status/4mgx59ese69wjx7d?svg=true)](https://ci.appveyor.com/project/kroniak/extensions-ecwid)
-[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Ecwid.svg)](https://www.nuget.org/packages/Ecwid/)
+[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Ecwid.svg)](https://www.nuget.org/packages/EcwidClient/)
 > This repository contains models and services C# classes for Ecwid API v1 and v3.
 
 C# Ecwid client is a modern, asynchronous, fast, testable client for [Ecwid API](https://developers.ecwid.com/api-documentation)
@@ -19,11 +18,11 @@ var result = await client.Configure(someShopId, someToken).Orders
 
 > The package is compiled for NET45 and .NET Platform Standard 1.4 which include .NET Core and other targets. [Read about it](https://github.com/dotnet/corefx/blob/master/Documentation/architecture/net-platform-standard.md#mapping-the-net-platform-standard-to-platforms).
 
-`PM> Install-Package Ecwid -Pre` - services and models
+`PM> Install-Package EcwidClient -Pre` - services and models
 
-`PM> Install-Package Ecwid.Legacy -Pre` - Legacy v1 services and models
+`PM> Install-Package EcwidClient.Legacy -Pre` - Legacy v1 services and models
 
-`PM> Install-Package Ecwid.OAuth -Pre` - a pipeline OAuth2 wrapper for ASP.NET Core
+`PM> Install-Package EcwidClient.OAuth -Pre` - a pipeline OAuth2 wrapper for ASP.NET Core
 
 ## Ecwid API
 

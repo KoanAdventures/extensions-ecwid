@@ -25,7 +25,7 @@ namespace Ecwid.Models
         /// The default tax.
         /// </value>
         [JsonProperty("defaultTax")]
-        public int DefaultTax { get; set; }
+        public double DefaultTax { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="Tax" /> is enabled.
