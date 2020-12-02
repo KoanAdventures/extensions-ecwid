@@ -147,6 +147,9 @@ namespace Ecwid.Models
         public string FulfillmentStatus { get; set; }
 
         
+        /// <summary>
+        /// Gets or sets the order Id
+        /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
 
