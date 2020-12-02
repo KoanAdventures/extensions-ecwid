@@ -176,8 +176,8 @@ namespace Ecwid.Test.Services
         {
             var exception = await
                 Assert.ThrowsAsync<ArgumentException>(
-                    async () => await _client.GetOrderAsync(0));
-            Assert.Contains("Order number is 0.", exception.Message);
+                    async () => await _client.GetOrderAsync(""));
+            Assert.Contains("Order Id is empty.", exception.Message);
         }
 
         [Fact]
@@ -187,10 +187,10 @@ namespace Ecwid.Test.Services
                 .RespondWithJson(Mocks.MockSearchResultZeroResult)
                 .RespondWithJson(Mocks.MockSearchResultZeroResult);
 
-            var result = await _client.GetOrderAsync(1);
+            var result = await _client.GetOrderAsync("1");
 
             Assert.Null(result);
-            _httpTest.ShouldHaveCalled($"{CheckOrdersUrl}&orderNumber=1")
+            _httpTest.ShouldHaveCalled($"{CheckOrdersUrl}&id=1")
                 .WithVerb(HttpMethod.Get)
                 .Times(1);
         }
@@ -344,7 +344,7 @@ namespace Ecwid.Test.Services
             _httpTest
                 .RespondWithJson(new UpdateStatus {UpdateCount = 1});
 
-            var result = await _client.UpdateOrderAsync(new OrderEntry {Email = "test@test.com", OrderNumber = 123});
+            var result = await _client.UpdateOrderAsync(new OrderEntry {Email = "test@test.com", Id = "123"});
 
             _httpTest.ShouldHaveCalled($"https://app.ecwid.com/api/v3/{ShopId}/orders/123?token={Token}")
                 .WithVerb(HttpMethod.Put)
@@ -373,7 +373,7 @@ namespace Ecwid.Test.Services
             _httpTest
                 .RespondWithJson(new DeleteStatus {DeleteCount = 1});
 
-            var result = await _client.DeleteOrderAsync(new OrderEntry {Email = "test@test.com", OrderNumber = 123});
+            var result = await _client.DeleteOrderAsync(new OrderEntry {Email = "test@test.com", Id = "123"});
 
             _httpTest.ShouldHaveCalled($"https://app.ecwid.com/api/v3/{ShopId}/orders/123?token={Token}")
                 .WithVerb(HttpMethod.Delete)
@@ -403,7 +403,7 @@ namespace Ecwid.Test.Services
                 .RespondWithJson("The order with given number is not found", 404);
 
             var exception = await Assert.ThrowsAsync<EcwidHttpException>(() =>
-                _client.DeleteOrderAsync(new OrderEntry {Email = "test@test.com", OrderNumber = 123}));
+                _client.DeleteOrderAsync(new OrderEntry {Email = "test@test.com", Id = "123"}));
 
             _httpTest.ShouldHaveCalled($"https://app.ecwid.com/api/v3/{ShopId}/orders/123?token={Token}")
                 .WithVerb(HttpMethod.Delete)

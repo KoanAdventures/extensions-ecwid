@@ -146,14 +146,9 @@ namespace Ecwid.Models
         [JsonProperty("fulfillmentStatus")]
         public string FulfillmentStatus { get; set; }
 
-        /// <summary>
-        /// Gets or sets the unique order number without prefixes/suffixes, e.g. 34.
-        /// </summary>
-        /// <value>
-        /// The order number
-        /// </value>
-        [JsonProperty("orderNumber")]
-        public int OrderNumber { get; set; }
+        
+        [JsonProperty("id")]
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or sets the order comments.

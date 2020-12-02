@@ -67,9 +67,9 @@ namespace Ecwid.Test.Real
                 }
             };
 
-            var result = await client.GetOrderAsync(18);
+            var result = await client.GetOrderAsync("123");
 
-            Assert.Equal(18, result.OrderNumber);
+            Assert.Equal("123", result.Id);
         }
 
         [Fact]
@@ -99,7 +99,7 @@ namespace Ecwid.Test.Real
                 }
             };
 
-            var result = await client.UpdateOrderAsync(new OrderEntry {Email = "test@test.com", OrderNumber = 123});
+            var result = await client.UpdateOrderAsync(new OrderEntry {Email = "test@test.com", Id = "123"});
 
             Assert.Equal(1, result.UpdateCount);
         }
@@ -116,7 +116,7 @@ namespace Ecwid.Test.Real
             };
 
             var exception = await Assert.ThrowsAsync<EcwidHttpException>(() =>
-                client.UpdateOrderAsync(new OrderEntry {Email = "test@test.com", OrderNumber = 123}));
+                client.UpdateOrderAsync(new OrderEntry {Email = "test@test.com", Id = "123"}));
 
             Assert.Equal(HttpStatusCode.BadRequest, exception.StatusCode);
         }

@@ -14,7 +14,7 @@
     <Company>Koan Adventures</Company>
     <Copyright>Copyright ©2019 by me@kroniak.net</Copyright>
     <Title>Ecwid Client</Title>
-    <PackageVersion>1.1.0</PackageVersion>
+    <PackageVersion>1.2.0</PackageVersion>
     <PackageId>EcwidClient</PackageId>
   </PropertyGroup>
 

@@ -43,7 +43,7 @@ namespace Ecwid.Test.Services
         {
             var order = new OrderEntry
             {
-                OrderNumber = 111111,
+                Id = "111111",
                 VendorOrderNumber = "111111",
                 TrackingNumber = "EA222222222222222",
                 CreateDate = DateTime.Parse("2016-03-24 05:51:53"),

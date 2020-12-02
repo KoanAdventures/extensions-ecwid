@@ -165,21 +165,21 @@ namespace Ecwid
         /// <summary>
         /// Gets the one order asynchronous.
         /// </summary>
-        /// <param name="orderNumber">The order number.</param>
-        /// <exception cref="System.ArgumentException"><paramref name="orderNumber" /> is out of range.</exception>
+        /// <param name="orderId">The order number.</param>
+        /// <exception cref="System.ArgumentException"><paramref name="orderId" /> is out of range.</exception>
         /// <exception cref="EcwidHttpException">Something happened to the HTTP call.</exception>
         /// <exception cref="EcwidConfigException">Credentials are invalid.</exception>
-        Task<OrderEntry> GetOrderAsync(int orderNumber);
+        Task<OrderEntry> GetOrderAsync(string orderId);
 
         /// <summary>
         /// Gets the one orders asynchronous.
         /// </summary>
-        /// <param name="orderNumber">The order number.</param>
+        /// <param name="orderId">The order number.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
-        /// <exception cref="System.ArgumentException"><paramref name="orderNumber" /> is out of range.</exception>
+        /// <exception cref="System.ArgumentException"><paramref name="orderId" /> is out of range.</exception>
         /// <exception cref="EcwidHttpException">Something happened to the HTTP call.</exception>
         /// <exception cref="EcwidConfigException">Credentials are invalid.</exception>
-        Task<OrderEntry> GetOrderAsync(int orderNumber, CancellationToken cancellationToken);
+        Task<OrderEntry> GetOrderAsync(string orderId, CancellationToken cancellationToken);
 
         /// <summary>
         /// Update one order asynchronously.
@@ -222,20 +222,20 @@ namespace Ecwid
         /// <summary>
         /// Delete one order asynchronously.
         /// </summary>
-        /// <param name="orderNumber">The order number to delete.</param>
+        /// <param name="orderId">The order number to delete.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <exception cref="ArgumentException">Order number is 0.</exception>
         /// <exception cref="EcwidHttpException">Something happened to the HTTP call.</exception>
         /// <exception cref="EcwidConfigException">Credentials are invalid.</exception>
-        Task<DeleteStatus> DeleteOrderAsync(int orderNumber, CancellationToken cancellationToken);
+        Task<DeleteStatus> DeleteOrderAsync(string orderId, CancellationToken cancellationToken);
 
         /// <summary>
         /// Delete one order asynchronously.
         /// </summary>
-        /// <param name="orderNumber">The order number to delete.</param>
+        /// <param name="orderId">The order number to delete.</param>
         /// <exception cref="ArgumentException">Order number is 0.</exception>
         /// <exception cref="EcwidHttpException">Something happened to the HTTP call.</exception>
         /// <exception cref="EcwidConfigException">Credentials are invalid.</exception>
-        Task<DeleteStatus> DeleteOrderAsync(int orderNumber);
+        Task<DeleteStatus> DeleteOrderAsync(string orderId);
     }
 }

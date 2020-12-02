@@ -125,16 +125,16 @@ namespace Ecwid
             => GetOrdersAsync(new {paymentStatus = "INCOMPLETE"}, cancellationToken);
 
         /// <inheritdoc />
-        public Task<OrderEntry> GetOrderAsync(int orderNumber)
-            => GetOrderAsync(orderNumber, CancellationToken.None);
+        public Task<OrderEntry> GetOrderAsync(string orderId)
+            => GetOrderAsync(orderId, CancellationToken.None);
 
         /// <inheritdoc />
-        public async Task<OrderEntry> GetOrderAsync(int orderNumber, CancellationToken cancellationToken)
+        public async Task<OrderEntry> GetOrderAsync(string orderId, CancellationToken cancellationToken)
         {
-            if (orderNumber <= 0)
-                throw new ArgumentException("Order number is 0.", nameof(orderNumber));
+            if (string.IsNullOrWhiteSpace(orderId))
+                throw new ArgumentException("Order Id is empty.", nameof(orderId));
 
-            var orders = await GetOrdersAsync(new {orderNumber}, cancellationToken);
+            var orders = await GetOrdersAsync(new { id = orderId }, cancellationToken);
 
             return orders.FirstOrDefault();
         }
@@ -142,8 +142,8 @@ namespace Ecwid
         /// <inheritdoc />
         public Task<UpdateStatus> UpdateOrderAsync(OrderEntry order, CancellationToken cancellationToken)
         {
-            if (order.OrderNumber <= 0) throw new ArgumentException("Order number is 0.", nameof(order));
-            return PutApiAsync<UpdateStatus>(GetUrl($"orders/{order.OrderNumber}"), order, cancellationToken);
+            if (string.IsNullOrWhiteSpace(order.Id)) throw new ArgumentException("Order Id is empty.", nameof(order));
+            return PutApiAsync<UpdateStatus>(GetUrl($"orders/{order.Id}"), order, cancellationToken);
         }
 
         /// <inheritdoc />
@@ -152,22 +152,22 @@ namespace Ecwid
 
         /// <inheritdoc />
         public Task<DeleteStatus> DeleteOrderAsync(OrderEntry order, CancellationToken cancellationToken)
-            => DeleteOrderAsync(order.OrderNumber, cancellationToken);
+            => DeleteOrderAsync(order.Id, cancellationToken);
 
         /// <inheritdoc />
         public Task<DeleteStatus> DeleteOrderAsync(OrderEntry order)
-            => DeleteOrderAsync(order.OrderNumber);
+            => DeleteOrderAsync(order.Id);
 
         /// <inheritdoc />
-        public Task<DeleteStatus> DeleteOrderAsync(int orderNumber, CancellationToken cancellationToken)
+        public Task<DeleteStatus> DeleteOrderAsync(string orderId, CancellationToken cancellationToken)
         {
-            if (orderNumber <= 0) throw new ArgumentException("Order number is 0.", nameof(orderNumber));
-            return DeleteApiAsync<DeleteStatus>(GetUrl($"orders/{orderNumber}"), cancellationToken);
+            if (string.IsNullOrWhiteSpace(orderId)) throw new ArgumentException("Order Id is empty.", nameof(orderId));
+            return DeleteApiAsync<DeleteStatus>(GetUrl($"orders/{orderId}"), cancellationToken);
         }
 
         /// <inheritdoc />
-        public Task<DeleteStatus> DeleteOrderAsync(int orderNumber)
-            => DeleteOrderAsync(orderNumber, CancellationToken.None);
+        public Task<DeleteStatus> DeleteOrderAsync(string orderId)
+            => DeleteOrderAsync(orderId, CancellationToken.None);
 
         #endregion
     }
