@@ -134,9 +134,7 @@ namespace Ecwid
             if (string.IsNullOrWhiteSpace(orderId))
                 throw new ArgumentException("Order Id is empty.", nameof(orderId));
 
-            var orders = await GetOrdersAsync(new { id = orderId }, cancellationToken);
-
-            return orders.FirstOrDefault();
+            return await GetApiAsync<OrderEntry>($"orders/{orderId}", cancellationToken);
         }
 
         /// <inheritdoc />
