@@ -40,6 +40,7 @@ namespace Ecwid
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="baseUrl">The base URL.</param>
+        /// <param name="credentials">The credentials</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <exception cref="EcwidHttpException">Something happened to the HTTP call.</exception>
         protected static async Task<T> GetApiAsync<T>(Url baseUrl, EcwidCredentials credentials, CancellationToken cancellationToken)
@@ -73,6 +74,7 @@ namespace Ecwid
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="baseUrl">The base URL.</param>
+        /// <param name="credentials">The credentials</param>
         /// <param name="query">The query.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <exception cref="EcwidHttpException">Something happened to the HTTP call.</exception>
@@ -86,6 +88,7 @@ namespace Ecwid
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="baseUrl">The base URL.</param>
+        /// <param name="credentials">The credentials</param>
         /// <param name="query">The query.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <exception cref="EcwidHttpException">Something happened to the HTTP call.</exception>
@@ -112,6 +115,7 @@ namespace Ecwid
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="baseUrl">The base URL.</param>
+        /// <param name="credentials">The credentials</param>
         /// <param name="payload">The payload.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <exception cref="EcwidHttpException">Something happened to the HTTP call.</exception>
@@ -137,6 +141,7 @@ namespace Ecwid
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="baseUrl">The base URL.</param>
+        /// <param name="credentials">The credentials</param>
         /// <param name="data">The new object.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <exception cref="EcwidHttpException">Something happened to the HTTP call.</exception>
@@ -161,6 +166,7 @@ namespace Ecwid
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="baseUrl">The base URL.</param>
+        /// <param name="credentials">The credentials</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <exception cref="EcwidHttpException">Something happened to the HTTP call.</exception>
         protected static async Task<T> DeleteApiAsync<T>(Url baseUrl, EcwidCredentials credentials, CancellationToken cancellationToken)
@@ -183,6 +189,7 @@ namespace Ecwid
         /// PUT the API asynchronous and return response.
         /// </summary>
         /// <param name="baseUrl">The base URL.</param>
+        /// <param name="credentials">The credentials</param>
         /// <param name="query">The query.</param>
         /// <param name="data">The new object.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
