@@ -23,7 +23,7 @@ namespace Ecwid
 
         /// <inheritdoc />
         public Task<bool> CheckDiscountCouponsTokenAsync(CancellationToken cancellationToken)
-            => CheckTokenAsync<DiscountCouponSearchResults>(GetUrl(DiscountCouponsUrl), cancellationToken);
+            => CheckTokenAsync<DiscountCouponSearchResults>(GetUrl(DiscountCouponsUrl), Credentials, cancellationToken);
 
         /// <inheritdoc />
         public Task<DiscountCouponInfo> GetDiscountCouponAsync(string couponIdentifier) =>
@@ -51,7 +51,7 @@ namespace Ecwid
             CancellationToken cancellationToken)
         {
             var response =
-                await GetApiAsync<DiscountCouponSearchResults>(GetUrl(DiscountCouponsUrl), query, cancellationToken);
+                await GetApiAsync<DiscountCouponSearchResults>(GetUrl(DiscountCouponsUrl), Credentials, query, cancellationToken);
 
             var result = response.DiscountCoupons ?? Enumerable.Empty<DiscountCouponInfo>();
 
@@ -76,6 +76,7 @@ namespace Ecwid
                     await
                         GetApiAsync<DiscountCouponSearchResults>(
                             GetUrl(DiscountCouponsUrl).SetQueryParams(new {offset = response.Offset + response.Limit}),
+                            Credentials,
                             query,
                             cancellationToken);
 
@@ -97,7 +98,7 @@ namespace Ecwid
         public Task<DiscountCouponCreateStatus> CreateDiscountCouponAsync(DiscountCouponInfo coupon,
             CancellationToken cancellationToken)
         {
-            return PostJsonApiAsync<DiscountCouponCreateStatus>(GetUrl(DiscountCouponsUrl), coupon,
+            return PostJsonApiAsync<DiscountCouponCreateStatus>(GetUrl(DiscountCouponsUrl), Credentials, coupon,
                 cancellationToken);
         }
 
@@ -119,7 +120,7 @@ namespace Ecwid
                 throw new ArgumentException("Coupon code must have a value", nameof(coupon.Code));
             }
 
-            return PutApiAsync<UpdateStatus>(GetUrl($"{DiscountCouponsUrl}/{coupon.Code}"), coupon,
+            return PutApiAsync<UpdateStatus>(GetUrl($"{DiscountCouponsUrl}/{coupon.Code}"), Credentials, coupon,
                 cancellationToken);
         }
 
@@ -130,7 +131,7 @@ namespace Ecwid
         /// <inheritdoc />
         public Task<DeleteStatus> DeleteDiscountCouponAsync(string couponIdentifier,
             CancellationToken cancellationToken) =>
-            DeleteApiAsync<DeleteStatus>(GetUrl($"{DiscountCouponsUrl}/{couponIdentifier}"),
+            DeleteApiAsync<DeleteStatus>(GetUrl($"{DiscountCouponsUrl}/{couponIdentifier}"), Credentials,
                 cancellationToken);
 
         /// <inheritdoc />

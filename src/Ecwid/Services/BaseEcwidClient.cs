@@ -17,12 +17,12 @@ namespace Ecwid
         /// Checks the shop authentication asynchronous.
         /// </summary>
         /// <exception cref="EcwidHttpException">Something happened to the HTTP call.</exception>
-        protected static async Task<bool> CheckTokenAsync<T>(Url url, CancellationToken cancellationToken)
+        protected static async Task<bool> CheckTokenAsync<T>(Url url, EcwidCredentials credentials, CancellationToken cancellationToken)
             where T : class
         {
             try
             {
-                await GetApiAsync<T>(url, new {limit = 1}, cancellationToken);
+                await GetApiAsync<T>(url, credentials, new {limit = 1}, cancellationToken);
                 return true;
             }
             catch (EcwidHttpException exception)
@@ -42,13 +42,14 @@ namespace Ecwid
         /// <param name="baseUrl">The base URL.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <exception cref="EcwidHttpException">Something happened to the HTTP call.</exception>
-        protected static async Task<T> GetApiAsync<T>(Url baseUrl, CancellationToken cancellationToken)
+        protected static async Task<T> GetApiAsync<T>(Url baseUrl, EcwidCredentials credentials, CancellationToken cancellationToken)
             where T : class
         {
             T poco;
             try
             {
-                poco = await baseUrl.GetJsonAsync<T>(cancellationToken);
+                poco = await baseUrl.WithOAuthBearerToken(credentials.Token)
+                    .GetJsonAsync<T>(cancellationToken);
             }
             catch (FlurlHttpException exception)
             {
@@ -75,10 +76,10 @@ namespace Ecwid
         /// <param name="query">The query.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <exception cref="EcwidHttpException">Something happened to the HTTP call.</exception>
-        protected static Task<T> GetApiAsync<T>(Url baseUrl, object query,
+        protected static Task<T> GetApiAsync<T>(Url baseUrl, EcwidCredentials credentials, object query,
             CancellationToken cancellationToken)
             where T : class
-            => GetApiAsync<T>(baseUrl.SetQueryParams(query), cancellationToken);
+            => GetApiAsync<T>(baseUrl.SetQueryParams(query), credentials, cancellationToken);
 
         /// <summary>
         /// POST the API asynchronous and return response.
@@ -88,13 +89,15 @@ namespace Ecwid
         /// <param name="query">The query.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <exception cref="EcwidHttpException">Something happened to the HTTP call.</exception>
-        protected static async Task<T> PostApiAsync<T>(Url baseUrl, object query, CancellationToken cancellationToken)
+        protected static async Task<T> PostApiAsync<T>(Url baseUrl, EcwidCredentials credentials, object query, CancellationToken cancellationToken)
             where T : class
         {
             T poco = null;
             try
             {
-                poco = await baseUrl.SetQueryParams(query).PostAsync(null, cancellationToken).ReceiveJson<T>();
+                poco = await baseUrl.WithOAuthBearerToken(credentials.Token)
+                    .SetQueryParams(query)
+                    .PostAsync(null, cancellationToken).ReceiveJson<T>();
             }
             catch (FlurlHttpException exception)
             {
@@ -112,14 +115,14 @@ namespace Ecwid
         /// <param name="payload">The payload.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <exception cref="EcwidHttpException">Something happened to the HTTP call.</exception>
-        protected static async Task<T> PostJsonApiAsync<T>(Url baseUrl, object payload,
+        protected static async Task<T> PostJsonApiAsync<T>(Url baseUrl, EcwidCredentials credentials, object payload,
             CancellationToken cancellationToken)
             where T : class
         {
             T poco = null;
             try
             {
-                poco = await baseUrl.PostJsonAsync(payload, cancellationToken).ReceiveJson<T>();
+                poco = await baseUrl.WithOAuthBearerToken(credentials.Token).PostJsonAsync(payload, cancellationToken).ReceiveJson<T>();
             }
             catch (FlurlHttpException exception)
             {
@@ -137,13 +140,13 @@ namespace Ecwid
         /// <param name="data">The new object.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <exception cref="EcwidHttpException">Something happened to the HTTP call.</exception>
-        protected static async Task<T> PutApiAsync<T>(Url baseUrl, object data, CancellationToken cancellationToken)
+        protected static async Task<T> PutApiAsync<T>(Url baseUrl, EcwidCredentials credentials, object data, CancellationToken cancellationToken)
             where T : class
         {
             T poco = null;
             try
             {
-                poco = await baseUrl.PutJsonAsync(data, cancellationToken).ReceiveJson<T>();
+                poco = await baseUrl.WithOAuthBearerToken(credentials.Token).PutJsonAsync(data, cancellationToken).ReceiveJson<T>();
             }
             catch (FlurlHttpException exception)
             {
@@ -160,13 +163,13 @@ namespace Ecwid
         /// <param name="baseUrl">The base URL.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <exception cref="EcwidHttpException">Something happened to the HTTP call.</exception>
-        protected static async Task<T> DeleteApiAsync<T>(Url baseUrl, CancellationToken cancellationToken)
+        protected static async Task<T> DeleteApiAsync<T>(Url baseUrl, EcwidCredentials credentials, CancellationToken cancellationToken)
             where T : class
         {
             T poco = null;
             try
             {
-                poco = await baseUrl.DeleteAsync(cancellationToken).ReceiveJson<T>();
+                poco = await baseUrl.WithOAuthBearerToken(credentials.Token).DeleteAsync(cancellationToken).ReceiveJson<T>();
             }
             catch (FlurlHttpException exception)
             {
@@ -184,12 +187,12 @@ namespace Ecwid
         /// <param name="data">The new object.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <exception cref="EcwidHttpException">Something happened to the HTTP call.</exception>
-        protected static async Task<bool> PutApiAsync(Url baseUrl, object query, object data,
+        protected static async Task<bool> PutApiAsync(Url baseUrl, EcwidCredentials credentials, object query, object data,
             CancellationToken cancellationToken)
         {
             try
             {
-                await baseUrl.SetQueryParams(query).PutJsonAsync(data, cancellationToken).ReceiveJson();
+                await baseUrl.WithOAuthBearerToken(credentials.Token).SetQueryParams(query).PutJsonAsync(data, cancellationToken).ReceiveJson();
             }
             catch (FlurlHttpException exception)
             {

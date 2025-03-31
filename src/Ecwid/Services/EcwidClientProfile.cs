@@ -17,7 +17,7 @@ namespace Ecwid
 
         /// <inheritdoc />
         public Task<Profile> GetProfileAsync(CancellationToken cancellationToken)
-            => GetApiAsync<Profile>(GetUrl("profile"), cancellationToken);
+            => GetApiAsync<Profile>(GetUrl("profile"), Credentials, cancellationToken);
 
         /// <inheritdoc />
         public Task<UpdateStatus> UpdateProfileAsync(Profile profile)
@@ -30,7 +30,7 @@ namespace Ecwid
                 throw new EcwidHttpException("Something happened to the HTTP call.", null,
                     new ArgumentNullException(nameof(profile)));
 
-            return PutApiAsync<UpdateStatus>(GetUrl("profile"), profile, cancellationToken);
+            return PutApiAsync<UpdateStatus>(GetUrl("profile"), Credentials, profile, cancellationToken);
         }
 
         #endregion

@@ -7,14 +7,13 @@
     <Authors>me@kroniak.net, i.am@lxalln.com</Authors>
     <Description>C# services and models classes to Ecwid API v1 and v3</Description>
     <PackageProjectUrl>https://github.com/KoanAdventures/extensions-ecwid</PackageProjectUrl>
-    <PackageIconUrl>https://dj925myfyz5v.cloudfront.net/favicon_v2.ico</PackageIconUrl>
     <RepositoryUrl>https://github.com/KoanAdventures/extensions-ecwid.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>ecwid api client rest async</PackageTags>
     <Company>Koan Adventures</Company>
     <Copyright>Copyright ©2019 by me@kroniak.net</Copyright>
     <Title>Ecwid Client</Title>
-    <PackageVersion>1.2.2</PackageVersion>
+    <PackageVersion>1.3.0</PackageVersion>
     <PackageId>EcwidClient</PackageId>
   </PropertyGroup>
 

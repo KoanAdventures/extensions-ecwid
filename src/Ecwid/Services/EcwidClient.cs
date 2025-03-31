@@ -79,8 +79,7 @@ namespace Ecwid
                 throw new EcwidConfigException("Credentials are null. Can not do a request.");
 
             return Settings.ApiUrl
-                .AppendPathSegments(Credentials.ShopId.ToString(), segment)
-                .SetQueryParam("token", Credentials.Token);
+                .AppendPathSegments(Credentials.ShopId.ToString(), segment);
         }
     }
 }

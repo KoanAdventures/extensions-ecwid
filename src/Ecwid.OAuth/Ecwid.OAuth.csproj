@@ -8,7 +8,6 @@
     <Description>ASP.NET Core OAuth2 middleware for Ecwid API v3</Description>
     <Copyright>Copyright ©2019 by me@kroniak.net</Copyright>
     <PackageProjectUrl>https://github.com/kroniak/extensions-ecwid</PackageProjectUrl>
-    <PackageIconUrl>https://dj925myfyz5v.cloudfront.net/favicon_v2.ico</PackageIconUrl>
     <RepositoryUrl>https://github.com/kroniak/extensions-ecwid.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>ecwid oauth2 middleware</PackageTags>

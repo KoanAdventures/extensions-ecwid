@@ -27,7 +27,7 @@ namespace Ecwid
 
         /// <inheritdoc />
         public Task<bool> CheckOrdersTokenAsync(CancellationToken cancellationToken)
-            => CheckTokenAsync<SearchResult>(GetUrl("orders"), cancellationToken);
+            => CheckTokenAsync<SearchResult>(GetUrl("orders"), Credentials, cancellationToken);
 
         /// <inheritdoc />
         public Task<IEnumerable<OrderEntry>> GetNewOrdersAsync()
@@ -51,7 +51,7 @@ namespace Ecwid
 
         /// <inheritdoc />
         public async Task<int> GetOrdersCountAsync(CancellationToken cancellationToken)
-            => (await GetApiAsync<SearchResult>(GetUrl("orders"), new {limit = 1}, cancellationToken)).Total;
+            => (await GetApiAsync<SearchResult>(GetUrl("orders"), Credentials, new {limit = 1}, cancellationToken)).Total;
 
         /// <inheritdoc />
         public Task<IEnumerable<OrderEntry>> GetPaidNotShippedOrdersAsync()
@@ -78,7 +78,7 @@ namespace Ecwid
         /// <inheritdoc />
         public async Task<IEnumerable<OrderEntry>> GetOrdersAsync(object query, CancellationToken cancellationToken)
         {
-            var response = await GetApiAsync<SearchResult>(GetUrl("orders"), query, cancellationToken);
+            var response = await GetApiAsync<SearchResult>(GetUrl("orders"), Credentials, query, cancellationToken);
 
             var result = response.Orders ?? Enumerable.Empty<OrderEntry>();
 
@@ -105,7 +105,7 @@ namespace Ecwid
                     await
                         GetApiAsync<SearchResult>(
                             GetUrl("orders").SetQueryParams(
-                                new {offset = response.Offset + response.Limit}), query, cancellationToken);
+                                new {offset = response.Offset + response.Limit}), Credentials, query, cancellationToken);
 
                 if (response.Orders != null)
                 {
@@ -134,14 +134,14 @@ namespace Ecwid
             if (string.IsNullOrWhiteSpace(orderId))
                 throw new ArgumentException("Order Id is empty.", nameof(orderId));
 
-            return await GetApiAsync<OrderEntry>(GetUrl($"orders/{orderId}"), cancellationToken);
+            return await GetApiAsync<OrderEntry>(GetUrl($"orders/{orderId}"), Credentials, cancellationToken);
         }
 
         /// <inheritdoc />
         public Task<UpdateStatus> UpdateOrderAsync(OrderEntry order, CancellationToken cancellationToken)
         {
             if (string.IsNullOrWhiteSpace(order.Id)) throw new ArgumentException("Order Id is empty.", nameof(order));
-            return PutApiAsync<UpdateStatus>(GetUrl($"orders/{order.Id}"), order, cancellationToken);
+            return PutApiAsync<UpdateStatus>(GetUrl($"orders/{order.Id}"), Credentials, order, cancellationToken);
         }
 
         /// <inheritdoc />
@@ -160,7 +160,7 @@ namespace Ecwid
         public Task<DeleteStatus> DeleteOrderAsync(string orderId, CancellationToken cancellationToken)
         {
             if (string.IsNullOrWhiteSpace(orderId)) throw new ArgumentException("Order Id is empty.", nameof(orderId));
-            return DeleteApiAsync<DeleteStatus>(GetUrl($"orders/{orderId}"), cancellationToken);
+            return DeleteApiAsync<DeleteStatus>(GetUrl($"orders/{orderId}"), Credentials, cancellationToken);
         }
 
         /// <inheritdoc />
