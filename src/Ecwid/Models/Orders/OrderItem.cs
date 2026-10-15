@@ -15,7 +15,7 @@ namespace Ecwid.Models
         /// The product identifier.
         /// </value>
         [JsonProperty("productId")]
-        public int ProductId { get; set; }
+        public long ProductId { get; set; }
 
         /// <summary>
         /// Gets or sets the ID of the category this product belongs to. If the product belongs to many categories, categoryID will
@@ -26,7 +26,7 @@ namespace Ecwid.Models
         /// The category identifier.
         /// </value>
         [JsonProperty("categoryId")]
-        public int CategoryId { get; set; }
+        public long CategoryId { get; set; }
 
         /// <summary>
         /// Gets or sets the price of ordered item in the cart.

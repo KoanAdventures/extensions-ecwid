@@ -16,7 +16,7 @@ namespace Ecwid.Models
         /// The product file identifier.
         /// </value>
         [JsonProperty("productFileId")]
-        public int ProductFileId { get; set; }
+        public long ProductFileId { get; set; }
 
         /// <summary>
         /// Gets or sets the max allowed number of file downloads. See E-goods article in Ecwid Help center for the details.

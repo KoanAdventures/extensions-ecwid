@@ -370,7 +370,7 @@ namespace Ecwid.Models
         /// The customer identifier.
         /// </value>
         [JsonProperty("customerId")]
-        public int? CustomerId { get; set; }
+        public long? CustomerId { get; set; }
 
         /// <summary>
         /// Gets or sets the customer group identifier.
@@ -379,7 +379,7 @@ namespace Ecwid.Models
         /// The customer group identifier.
         /// </value>
         [JsonProperty("customerGroupId")]
-        public int CustomerGroupId { get; set; }
+        public long CustomerGroupId { get; set; }
 
         /// <summary>
         /// Gets or sets the name of group (membership) the customer belongs to.

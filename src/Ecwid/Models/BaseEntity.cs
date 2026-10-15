@@ -16,6 +16,6 @@ namespace Ecwid.Models
         /// The identifier
         /// </value>
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
     }
 }
